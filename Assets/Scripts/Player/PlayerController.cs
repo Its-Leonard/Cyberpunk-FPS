@@ -1,15 +1,13 @@
-﻿using UnityEngine;
+﻿using Mirror;
+using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     #region Variables
 
     [SerializeField] public KeyCode jumpKey;
     [SerializeField] public KeyCode crouchKey;
-
-
-    [SerializeField] public Camera fpCam;
 
     [SerializeField] public Transform standCamPos;
     [SerializeField] public Transform crouchCamPos;
@@ -50,6 +48,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 moveDir;
 
+    private Camera fpCam;
+
     #endregion
 
     #region Functions
@@ -67,9 +67,17 @@ public class PlayerController : MonoBehaviour
         isFalling = false;
 
         moveDir = Vector3.zero;
+
+        fpCam = this.transform.Find("FP Camera").GetComponent<Camera>();
+
+        fpCam.transform.position = standCamPos.position;
     }
 
     private void Update(){
+        if (!this.isLocalPlayer)
+            return;
+
+
         LayerMask layerMask = LayerMask.GetMask("Ground");
         bool colliding = isColliding(feetPos.transform.position, feetCheckRadius, layerMask);
 
@@ -116,6 +124,9 @@ public class PlayerController : MonoBehaviour
 
 
     private void FixedUpdate(){
+        if (!this.isLocalPlayer)
+            return;
+
         if (isCrouching){
             fpCam.transform.position = Vector3.MoveTowards(fpCam.transform.position, crouchCamPos.transform.position, 10f * Time.fixedDeltaTime);
         }
@@ -163,6 +174,10 @@ public class PlayerController : MonoBehaviour
     void OnDrawGizmos(){
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(feetPos.transform.position, feetCheckRadius);
+    }
+
+    public bool getIsLocalPlayer(){
+        return this.isLocalPlayer;
     }
 
     #endregion

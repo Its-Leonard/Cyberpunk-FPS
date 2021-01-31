@@ -4,7 +4,7 @@ public class GlobalVariables : MonoBehaviour
 {
     #region Variables
 
-	public Camera fpCam;
+
 
     #endregion
 

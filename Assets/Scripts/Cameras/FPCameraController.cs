@@ -4,32 +4,34 @@ public class FPCameraController : MonoBehaviour
 {
     #region Variables
 
+    private PlayerController playerController;
+
 	private const float mouseSensitivityX = 100f;
     private const float mouseSensitivityY = 75f;
 
     private float xRotation = 0f;
 
-    [SerializeField] public Transform playerBody;
+    private Transform playerBody;
 
     #endregion
 
     #region Functions
 
-
-    private void Awake(){
-
-    }
-
     private void Start(){
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-    }
 
-    private void Update(){
-
+        playerBody = this.transform.parent;
+        playerController = this.transform.parent.GetComponent<PlayerController>();
     }
 
     private void FixedUpdate(){
+        if (!playerController.getIsLocalPlayer()){
+            this.GetComponent<Camera>().enabled = false;
+
+            return;
+        }
+
         float mouseX = getMouseInput().Item1, mouseY = getMouseInput().Item2;
 
         LockXRotation(mouseY);
