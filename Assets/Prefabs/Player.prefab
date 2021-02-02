@@ -2432,6 +2432,7 @@ GameObject:
   - component: {fileID: 9127909601590565250}
   - component: {fileID: 9127909601590565249}
   - component: {fileID: -7046505557000227364}
+  - component: {fileID: 8108255456708761781}
   - component: {fileID: 4643586773764992755}
   - component: {fileID: 5418348092119362128}
   m_Layer: 0
@@ -2474,13 +2475,15 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   shootKey: 323
-  wallHitParticle: {fileID: 7495589860907602533, guid: 3d044353a5e3872488a42954ce45039b,
+  wallHitParticle: {fileID: 3750144046732221801, guid: 3d044353a5e3872488a42954ce45039b,
     type: 3}
-  bodyHitParticle: {fileID: 6407804077964073905, guid: 5693d0236d072194fab34a3615605caa,
+  bodyHitParticle: {fileID: 6608580807757778201, guid: 5693d0236d072194fab34a3615605caa,
     type: 3}
-  headHitParticle: {fileID: 5890773776478406977, guid: 352c66b50ebee0846abdd798b40a62a7,
+  headHitParticle: {fileID: 6253845173745092069, guid: 352c66b50ebee0846abdd798b40a62a7,
     type: 3}
   currentPistolTimer: 0
+  primaryGun: 
+  secondaryGun: 
 --- !u!143 &9127909601590565250
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2519,7 +2522,7 @@ MonoBehaviour:
   crouchCamPos: {fileID: 9127909601367878782}
   feetPos: {fileID: 9127909602437049994}
   fallingThreshold: -5
-  gravity: 25
+  gravity: 20
   minFallDamageDistance: 0
   fallDamageMultiplier: 0
 --- !u!114 &-7046505557000227364
@@ -2536,6 +2539,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+--- !u!114 &8108255456708761781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9127909601590565255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa925eaf5a154474a948b8439bebde1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupRange: 5
+  pickable:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &4643586773764992755
 MonoBehaviour:
   m_ObjectHideFlags: 0

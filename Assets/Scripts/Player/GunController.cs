@@ -18,6 +18,8 @@ public class GunController : NetworkBehaviour
     [HideInInspector, SerializeField] public const float pistolHeadDamage = 50f;
     [HideInInspector, SerializeField] public const float pistolBodyDamage = 15f;
 
+    private const string startGun = "Glock";
+
     private Camera fpCam;
 
     #endregion
@@ -32,11 +34,15 @@ public class GunController : NetworkBehaviour
         float gunTimer = (float) getVariableValue(currentGun.ToLower() + "Timer");
 
         setVariableValue("current" + currentGun + "Timer", gunTimer);
+
+        GunManager.setSecondaryGun(startGun);
     }
 
     void Update(){
         if (!this.isLocalPlayer)
             return;
+
+        //Debug.Log(secondaryGun);
 
         float currentGunTimer = (float) getVariableValue("current" + currentGun + "Timer");
         float gunTimer = (float) getVariableValue(currentGun.ToLower() + "Timer");
@@ -86,5 +92,32 @@ public class GunController : NetworkBehaviour
         return value;
     }
 
+    public static void test(){
+        Debug.Log("huh");
+    }
+
     #endregion
+}
+
+
+
+
+public class GunManager 
+{
+    private static string primaryGun, secondaryGun;
+    
+
+
+    public static string getPrimaryGun(){
+        return primaryGun;
+    }
+    public static string getSecondaryGun(){
+        return secondaryGun;
+    }
+    public static void setPrimaryGun(string name){
+        primaryGun = name;
+    }
+    public static void setSecondaryGun(string name){
+        secondaryGun = name;
+    }
 }

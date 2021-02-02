@@ -32,7 +32,7 @@ public class PlayerController : NetworkBehaviour
     private const float walkSpeed = 6f;
     private const float fallSpeed = 6f;
 
-    private const float jumpForce = 9f;
+    private const float jumpForce = 7f;
 
     private bool isGrounded;
     private bool lastIsGrounded;
